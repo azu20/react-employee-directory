@@ -4,8 +4,8 @@ import Row from "./Row";
 import Col from "./Col";
 import Card from "./Card";
 import SearchForm from "./SearchForm";
-import MovieDetail from "./EmployeeDetail";
-import API from "../utils/API";
+import EmployeeDetail from "./EmployeeDetail";
+import API from "../controller/API";
 
 class ApiContainer extends Component {
   state = {
@@ -15,13 +15,13 @@ class ApiContainer extends Component {
 
   // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
-    this.searchMovies("The Matrix");
+    this.searchEmployees("The Matrix");
   }
 
-  searchMovies = query => {
+  searchEmployees = query => {
     API.search(query)
       .then((res) => {
-        console.log("searchMovies",res.data.results[0] );
+        console.log("searchEmployees",res.data.results[0] );
         this.setState({ result: res.data.results[0] });
       })
       .catch(err => console.log(err));
@@ -40,7 +40,7 @@ class ApiContainer extends Component {
   // When the form is submitted, search the OMDB API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchMovies(this.state.search);
+    this.searchEmployees(this.state.search);
   };
 
   render() {
@@ -49,10 +49,10 @@ class ApiContainer extends Component {
         <Row>
           <Col size="md-8">
             <Card
-              heading={this.state.result.Title || "Search for a Movie to Begin"}
+              heading={this.state.result.Title || "Search for an Employee to Begin"}
             >
               {this.state.result.Title ? (
-                <MovieDetail
+                <EmployeeDetail
                   title={this.state.result.Title}
                   src={this.state.result.Poster}
                   director={this.state.result.Director}
