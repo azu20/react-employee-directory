@@ -2,11 +2,15 @@ import React from "react";
 
 function EmployeeDetail(props) {
   return (
-    <div className="text-center">
-      <img alt={props.title} className="img-fluid" src={props.src} style={{ margin: "0 auto" }} />
-      <h3>Director(s): {props.director}</h3>
-      <h3>Genre: {props.genre}</h3>
-      <h3>Released: {props.released}</h3>
+
+    <div heading="employees-list">
+      <ul className="list-group list-group-horizontal-xl">
+        <li className="list-group-item"><img alt={props.name} className="img-fluid" src={props.picture} style={{ margin: "0 auto" }}/> </li>
+        <li className="list-group-item"> {props.name}</li>
+        <li className="list-group-item"> {props.email}</li>
+        <li className="list-group-item"> {props.cell}</li>
+        <li className="list-group-item"> {props.dob}</li>
+      </ul>
     </div>
   );
 }

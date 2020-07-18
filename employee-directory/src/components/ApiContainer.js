@@ -45,26 +45,10 @@ class ApiContainer extends Component {
 
   render() {
     return (
+        <div>
       <Container>
-        <Row>
-          <Col size="md-8">
-            <Card
-              heading={this.state.result.Title || "Search for an Employee to Begin"}
-            >
-              {this.state.result.Title ? (
-                <EmployeeDetail
-                  title={this.state.result.Title}
-                  src={this.state.result.Poster}
-                  director={this.state.result.Director}
-                  genre={this.state.result.Genre}
-                  released={this.state.result.Released}
-                />
-              ) : (
-                  <h3>No Results to Display</h3>
-                )}
-            </Card>
-          </Col>
-          <Col size="md-4">
+          <Row>
+          <Col size="md-12">
             <Card heading="Search">
               <SearchForm
                 value={this.state.search}
@@ -72,9 +56,27 @@ class ApiContainer extends Component {
                 handleFormSubmit={this.handleFormSubmit}
               />
             </Card>
+            <Card
+            //   heading={this.state.result.name}
+            >
+              {this.state.result.name ? (
+                <EmployeeDetail
+                  name={this.state.result.name}
+                  cell={this.state.result.cell}
+                  email={this.state.result.email}
+                  dob={this.state.result.dob}
+                  picture={this.state.result.picture.thumbnail}
+                //   released={this.state.result.Released}
+                />
+              ) : (
+                  <h3>No Results to Display</h3>
+                )}
+            </Card>
           </Col>
-        </Row>
-      </Container>
+          </Row>
+          </Container>
+  
+      </div>
     );
   }
 }
