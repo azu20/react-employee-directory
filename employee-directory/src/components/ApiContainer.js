@@ -48,21 +48,21 @@ class ApiContainer extends Component {
         <div>
       <Container>
           <Row>
-          <Col size="md-12">
-            <Card heading="Search">
+          <Col size="sm-12">
+            <div heading="Search">
               <SearchForm
                 value={this.state.search}
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
               />
-            </Card>
+            </div>
             <Card
             //   heading={this.state.result.name}
             >
               {this.state.result.name ? (
                 <EmployeeDetail
                   name={this.state.result.name}
-                  cell={this.state.result.cell}
+                  phone={this.state.result.phone}
                   email={this.state.result.email}
                   dob={this.state.result.dob}
                   picture={this.state.result.picture.thumbnail}
