@@ -9,25 +9,24 @@ import API from "../controller/API";
 
 class ApiContainer extends Component {
   state = {
-    result: {},
+    result: [],
     search: ""
   };
 
   // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
-    this.searchEmployees("The Matrix");
+    API.search("")
+    .then((res) => {
+      console.log("mounting",res.data.results );
+      this.setState({ result: res.data.results });
+    })
+    .catch(err => console.log(err)); 
   }
 
   searchEmployees = query => {
-    API.search(query)
-      .then((res) => {
-        console.log("searchEmployees",res.data.results[0] );
-        this.setState({ result: res.data.results[0] });
-      })
-      .catch(err => console.log(err));
+    return this.state.result.filter(person => person.name.first.includes(query) || person.name.last.includes(query) || person.phone.includes(query))
+
   };
-
-
 
   handleInputChange = event => {
     const value = event.target.value;
@@ -40,7 +39,8 @@ class ApiContainer extends Component {
   // When the form is submitted, search the OMDB API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchEmployees(this.state.search);
+    this.render();
+   // this.searchEmployees(this.state.search);
   };
 
   render() {
@@ -59,18 +59,28 @@ class ApiContainer extends Component {
             <Card
             //   heading={this.state.result.name}
             >
-              {this.state.result.name ? (
-                <EmployeeDetail
-                  name={this.state.result.name}
-                  phone={this.state.result.phone}
-                  email={this.state.result.email}
-                  dob={this.state.result.dob}
-                  picture={this.state.result.picture.thumbnail}
-                //   released={this.state.result.Released}
-                />
-              ) : (
-                  <h3>No Results to Display</h3>
-                )}
+            { this.state.result.size !== 0 ? 
+            (
+             this.state.result.filter(person =>
+                person.name.first.includes(this.state.search) || 
+                person.name.last.includes(this.state.search) || 
+                person.phone.includes(this.state.search)
+            )
+             .map(x => 
+                   <EmployeeDetail
+                   key={x.login.uuid}
+                   name={x.name}
+                   phone={x.phone}
+                   email={x.email}
+                   dob={x.dob}
+                   picture={x.picture.thumbnail}/>
+                 //   released={this.state.result.Released}
+                 
+                )
+             ) : ( 
+                <ul className="list-group list-group-primary-sm">
+                No Results to Display</ul>
+             ) }
             </Card>
           </Col>
           </Row>
