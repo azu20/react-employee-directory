@@ -1,5 +1,8 @@
 # Unit 19 React Homework: Employee Directory
 
+https://github.com/azu20/react-employee-directory 
+
+
 ## Overview
 
 This app uses React and serves as an employee directory. I broke up my application's UI into components, manage component state, and respond to user events.
@@ -21,12 +24,4 @@ The user should be able to:
   * Sort the table by at least one category
 
   * Filter the users by at least one property.
-
-## Submission on BCS
-
-You are required to submit the following:
-
-* the URL to the deployed application
-
-* the URL to the Github repository
 
